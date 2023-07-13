@@ -50,14 +50,14 @@
 
       let singlePlayerMode = false;
       let squares = Array(dimension).fill(Array(dimension).fill(null));
-    
+
       let xIsNext = Math.random() < 0.5; // Chọn ngẫu nhiên người chơi đi trước , nhỏ hơn 0.5, xIsNext sẽ được gán giá trị true (người chơi X đi trước)
       let theWinner = null;
       let winningLine = [];//khởi tạo với một mảng rỗng để lưu trữ các ô thắng nếu có.
 
       const dimensions = [10, 12, 16, 20];
       let dimensionIndex = 0; //để lưu trữ chỉ số của kích thước hiện tại trong mảng dimensions.
-//  xử lý sự kiện khi người dùng click vào nút thay đổi kích thước bàn cờ.
+      //  xử lý sự kiện khi người dùng click vào nút thay đổi kích thước bàn cờ.
       dimensionButton.addEventListener('click', function () {
         dimensionIndex = (dimensionIndex + 1) % dimensions.length;
         dimension = dimensions[dimensionIndex];
@@ -295,13 +295,76 @@
 
       function restartGame() {
         squares = Array(dimension).fill(Array(dimension).fill(null));
-        xIsNext = true;
+        xIsNext = Math.random() < 0.5; // Chọn ngẫu nhiên người chơi đi trước
         theWinner = null;
         winningLine = [];
         renderBoard();
         updateStatus();
       }
 
+    /*   function makeComputerMove() {
+        if (!singlePlayerMode || theWinner) {
+          return;
+        }
+
+        const availableMoves = [];
+        const humanPlayer = xIsNext ? 'X' : 'O';
+        const computerPlayer = xIsNext ? 'O' : 'X';
+
+        squares.forEach((row, rowIndex) => {
+          row.forEach((col, colIndex) => {
+            if (!squares[rowIndex][colIndex]) {
+              availableMoves.push([rowIndex, colIndex]);
+            }
+          });
+        });
+
+        if (availableMoves.length > 0) {
+          // Check if the computer can win in the next move
+          for (let i = 0; i < availableMoves.length; i++) {
+            const [row, col] = availableMoves[i];
+            const newSquares = squares.map((row) => [...row]);
+            newSquares[row][col] = computerPlayer;
+
+            if (calculateWinner(newSquares, row, col) === computerPlayer) {
+              handleClick(row, col);
+              return;
+            }
+          }
+
+          // Check if the human player can win in the next move
+          for (let i = 0; i < availableMoves.length; i++) {
+            const [row, col] = availableMoves[i];
+            const newSquares = squares.map((row) => [...row]);
+            newSquares[row][col] = humanPlayer;
+
+            if (calculateWinner(newSquares, row, col) === humanPlayer) {
+              handleClick(row, col);
+              return;
+            }
+          }
+
+          // Random move for normal difficulty
+          const randomIndex = Math.floor(Math.random() * availableMoves.length);
+          const [row, col] = availableMoves[randomIndex];
+
+          // Choose a winning move for hard difficulty
+          if (availableMoves.length >= 3) {
+            for (let i = 0; i < availableMoves.length; i++) {
+              const [row, col] = availableMoves[i];
+              const newSquares = squares.map((row) => [...row]);
+              newSquares[row][col] = computerPlayer;
+
+              if (isWinningMove(newSquares, computerPlayer)) {
+                handleClick(row, col);
+                return;
+              }
+            }
+          }
+
+          handleClick(row, col);
+        }
+      } */
       function makeComputerMove() {
         if (!singlePlayerMode || theWinner) {
           return;

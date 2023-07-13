@@ -295,14 +295,14 @@
 
       function restartGame() {
         squares = Array(dimension).fill(Array(dimension).fill(null));
-      xIsNext = Math.random() < 0.5;  // Chọn ngẫu nhiên người chơi đi trước
+        xIsNext = true; 
         theWinner = null;
         winningLine = [];
         renderBoard();
         updateStatus();
       }
 
-  function makeComputerMove() {
+      function makeComputerMove() {
         if (!singlePlayerMode || theWinner) {
           return;
         }

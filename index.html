@@ -295,77 +295,14 @@
 
       function restartGame() {
         squares = Array(dimension).fill(Array(dimension).fill(null));
-        xIsNext = Math.random() < 0.5; // Chọn ngẫu nhiên người chơi đi trước
+      xIsNext = Math.random() < 0.5;  // Chọn ngẫu nhiên người chơi đi trước
         theWinner = null;
         winningLine = [];
         renderBoard();
         updateStatus();
       }
 
-    /*   function makeComputerMove() {
-        if (!singlePlayerMode || theWinner) {
-          return;
-        }
-
-        const availableMoves = [];
-        const humanPlayer = xIsNext ? 'X' : 'O';
-        const computerPlayer = xIsNext ? 'O' : 'X';
-
-        squares.forEach((row, rowIndex) => {
-          row.forEach((col, colIndex) => {
-            if (!squares[rowIndex][colIndex]) {
-              availableMoves.push([rowIndex, colIndex]);
-            }
-          });
-        });
-
-        if (availableMoves.length > 0) {
-          // Check if the computer can win in the next move
-          for (let i = 0; i < availableMoves.length; i++) {
-            const [row, col] = availableMoves[i];
-            const newSquares = squares.map((row) => [...row]);
-            newSquares[row][col] = computerPlayer;
-
-            if (calculateWinner(newSquares, row, col) === computerPlayer) {
-              handleClick(row, col);
-              return;
-            }
-          }
-
-          // Check if the human player can win in the next move
-          for (let i = 0; i < availableMoves.length; i++) {
-            const [row, col] = availableMoves[i];
-            const newSquares = squares.map((row) => [...row]);
-            newSquares[row][col] = humanPlayer;
-
-            if (calculateWinner(newSquares, row, col) === humanPlayer) {
-              handleClick(row, col);
-              return;
-            }
-          }
-
-          // Random move for normal difficulty
-          const randomIndex = Math.floor(Math.random() * availableMoves.length);
-          const [row, col] = availableMoves[randomIndex];
-
-          // Choose a winning move for hard difficulty
-          if (availableMoves.length >= 3) {
-            for (let i = 0; i < availableMoves.length; i++) {
-              const [row, col] = availableMoves[i];
-              const newSquares = squares.map((row) => [...row]);
-              newSquares[row][col] = computerPlayer;
-
-              if (isWinningMove(newSquares, computerPlayer)) {
-                handleClick(row, col);
-                return;
-              }
-            }
-          }
-
-          handleClick(row, col);
-        }
-      } */
-      function makeComputerMove() {
+  function makeComputerMove() {
         if (!singlePlayerMode || theWinner) {
           return;
         }
@@ -428,6 +365,8 @@
           handleClick(row, col);
         }
       }
+
+
 
       function isWinningMove(currentSquares, player) {
         for (let row = 0; row < dimension; row++) {
